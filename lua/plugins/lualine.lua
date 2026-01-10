@@ -2,25 +2,54 @@ return {
   "nvim-lualine/lualine.nvim",
   -- enabled = false,
   config = function()
-    local mode = {
-      "mode",
-      fmt = function(str)
-        return " " .. str
-        -- return ' ' .. str:sub(1, 1) -- displays only the first character of the mode
-      end,
-    }
-
     local icons = LazyVim.config.icons
-
-    -- local filename = {
-    --   "filename",
-    --   file_status = true, -- displays file status (readonly status, modified status)
-    --   path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
-    -- }
 
     local hide_in_width = function()
       return vim.fn.winwidth(0) > 100
     end
+
+    local mode = {
+      "mode",
+      fmt = function(str)
+        return " " .. str
+        -- return " " .. str:sub(1, 1) -- displays only the first character of the mode
+      end,
+    }
+
+    local lsp_status = {
+      function()
+        local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
+        if #buf_clients == 0 then
+          return "LSP Inactive"
+        end
+
+        local buf_client_names = {}
+
+        for _, client in pairs(buf_clients) do
+          table.insert(buf_client_names, client.name)
+        end
+
+        local unique_client_names = table.concat(buf_client_names, ", ")
+        local language_servers = string.format("[%s]", unique_client_names)
+
+        return language_servers
+      end,
+    }
+
+    local filetype = {
+      "filetype",
+      icon_only = true,
+      separator = "",
+      padding = { left = 1, right = 0 },
+      cond = hide_in_width,
+    }
+
+    local filename = {
+      "filename",
+      file_status = true, -- displays file status (readonly status, modified status)
+      path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
+      padding = { left = 0, right = 1 },
+    }
 
     local diagnostics = {
       "diagnostics",
@@ -33,18 +62,10 @@ return {
       cond = hide_in_width,
     }
 
-    local filetype = {
-      "filetype",
-      icon_only = true,
-      separator = "",
-      padding = { left = 1, right = 0 },
-      cond = hide_in_width,
-    }
-
     local encoding = {
       "encoding",
       colored = true,
-      padding = { left = 0, right = 1 },
+      padding = { left = 1, right = 1 },
       cond = hide_in_width,
     }
 
@@ -87,15 +108,16 @@ return {
     require("lualine").setup({
       options = {
         icons_enabled = true,
-        theme = "solarized-osaka", -- Set theme based on environment variable
+        theme = "solarized_dark", -- Set theme based on environment variable
 
         -- theme = "auto", -- Set theme based on environment variable
         -- Some useful glyphs:
         -- https://www.nerdfonts.com/cheat-sheet
         --        
-        section_separators = { left = "", right = "" },
+        -- section_separators = { left = "", right = "" },
         -- section_separators = { left = "", right = "" },
         -- component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" },
         disabled_filetypes = { "alpha", "neo-tree" },
         always_divide_middle = true,
@@ -104,16 +126,20 @@ return {
         lualine_a = { mode },
         lualine_b = { "branch" },
         lualine_c = {
-          LazyVim.lualine.root_dir(),
+          -- LazyVim.lualine.root_dir(),
           filetype,
-          LazyVim.lualine.pretty_path(),
+          -- filename,
+          { LazyVim.lualine.pretty_path(), padding = { left = 0, right = 1 }, cond = hide_in_width },
         },
         lualine_x = {
           dap_status,
           diagnostics,
           diff,
           copilot,
+          lsp_status,
           encoding,
+          -- "fileformat",
+          "filetype",
         },
         lualine_y = { "location" },
         lualine_z = { "progress" },

@@ -51,10 +51,10 @@ if __name__ == "__main__":
   vim.cmd("normal! G")
 end
 -- 绑定自动命令：在新建 .py 文件时执行函数
-vim.api.nvim_create_autocmd("BufNewFile", {
-  group = augroup_fileheader,
-  pattern = "*.py",
-  -- 仅对 .py 文件生效
-  callback = create_python_header,
-  -- 触发时调用上面的函数
-})
+-- vim.api.nvim_create_autocmd("BufNewFile", {
+--   group = augroup_fileheader,
+--   pattern = "*.py",
+--   -- 仅对 .py 文件生效
+--   callback = create_python_header,
+--   -- 触发时调用上面的函数
+-- })
