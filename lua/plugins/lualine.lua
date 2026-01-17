@@ -34,6 +34,7 @@ return {
 
         return language_servers
       end,
+      cond = hide_in_width,
     }
 
     local filetype = {
