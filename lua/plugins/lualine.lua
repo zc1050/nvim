@@ -41,7 +41,6 @@ return {
       icon_only = true,
       separator = "",
       padding = { left = 1, right = 0 },
-      cond = hide_in_width,
     }
 
     local filename = {
@@ -129,7 +128,7 @@ return {
           -- LazyVim.lualine.root_dir(),
           filetype,
           -- filename,
-          { LazyVim.lualine.pretty_path(), padding = { left = 0, right = 1 }, cond = hide_in_width },
+          { LazyVim.lualine.pretty_path(), padding = { left = 0, right = 1 } },
         },
         lualine_x = {
           dap_status,
