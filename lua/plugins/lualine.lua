@@ -44,10 +44,15 @@ return {
       padding = { left = 1, right = 0 },
     }
 
+    local fileformat = {
+      "fileformat",
+      cond = hide_in_width,
+    }
+
     local filename = {
       "filename",
       file_status = true, -- displays file status (readonly status, modified status)
-      path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
+      path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
       padding = { left = 0, right = 1 },
     }
 
@@ -114,11 +119,11 @@ return {
         -- Some useful glyphs:
         -- https://www.nerdfonts.com/cheat-sheet
         --        
-        -- section_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
         -- section_separators = { left = "", right = "" },
-        -- component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
-        component_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
+        -- section_separators = { left = "", right = "" },
+        -- component_separators = { left = "", right = "" },
         disabled_filetypes = { "alpha", "neo-tree" },
         always_divide_middle = true,
       },
@@ -138,7 +143,7 @@ return {
           copilot,
           lsp_status,
           encoding,
-          -- "fileformat",
+          -- fileformat,
           "filetype",
         },
         lualine_y = { "location" },
