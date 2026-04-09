@@ -6,7 +6,7 @@ return {
         relative = "editor",
         border = "rounded",
         position = "float",
-        backdrop = 95,
+        backdrop = 80,
         height = 0.75,
         width = 0.8,
         zindex = 50,

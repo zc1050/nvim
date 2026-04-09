@@ -24,12 +24,12 @@ local function create_python_header()
 #!/bin/env python
 
 """
-@File    :   %s
-@Author  :   %s
-@Contact :   zc1050@gmail.com
-@Date    :   %s
-@Version :   1.0
-@Desc    :   None
+
+Version :   1.0
+Author  :   %s
+Contact :   zc1050@gmail.com
+Date    :   %s
+
 """
 
 
@@ -40,7 +40,6 @@ def main():
 if __name__ == "__main__":
     main()
 ]],
-    filename,
     author,
     date_str
   )
@@ -51,10 +50,10 @@ if __name__ == "__main__":
   vim.cmd("normal! G")
 end
 -- 绑定自动命令：在新建 .py 文件时执行函数
--- vim.api.nvim_create_autocmd("BufNewFile", {
---   group = augroup_fileheader,
---   pattern = "*.py",
---   -- 仅对 .py 文件生效
---   callback = create_python_header,
---   -- 触发时调用上面的函数
--- })
+vim.api.nvim_create_autocmd("BufNewFile", {
+  group = augroup_fileheader,
+  pattern = "*.py",
+  -- 仅对 .py 文件生效
+  callback = create_python_header,
+  -- 触发时调用上面的函数
+})

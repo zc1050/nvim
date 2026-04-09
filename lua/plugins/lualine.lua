@@ -64,7 +64,7 @@ return {
       colored = true,
       update_in_insert = true,
       always_visible = false,
-      cond = hide_in_width,
+      -- cond = hide_in_width,
     }
 
     local encoding = {
@@ -113,9 +113,9 @@ return {
     require("lualine").setup({
       options = {
         icons_enabled = true,
-        theme = "solarized_dark", -- Set theme based on environment variable
+        -- theme = "solarized_dark", -- Set theme based on environment variable
 
-        -- theme = "auto", -- Set theme based on environment variable
+        theme = "auto", -- Set theme based on environment variable
         -- Some useful glyphs:
         -- https://www.nerdfonts.com/cheat-sheet
         --        

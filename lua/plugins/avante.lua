@@ -12,7 +12,7 @@ return {
           __inherited_from = "openai",
           api_key_name = "DEEPSEEK_API_KEY",
           endpoint = "https://api.deepseek.com",
-          model = "deepseek-coder",
+          model = "deepseek-chat",
           max_tokens = 8192,
           -- 使用 thinking 参数启用推理模式
           -- extra_body = {
