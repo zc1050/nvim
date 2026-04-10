@@ -21,7 +21,7 @@ local function create_python_header()
   -- 构造文件头信息 (使用三重引号的格式)
   local header = string.format(
     [[
-#!/bin/env python
+#!/bin/env python3
 
 """
 
